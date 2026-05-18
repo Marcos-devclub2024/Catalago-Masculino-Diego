@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Masculino - Feira dos Importados</title>
+    <style>
+        :root {
+            --bg-dark: #111111;
+            --bg-light: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --accent: #d4af37; /* Dourado */
+            --accent-hover: #b8972f;
+            --whatsapp-green: #25d366;
+            --gray-sub: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-bottom: 100px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 35px 20px 20px 20px;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 1.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .localizacao {
+            display: inline-block;
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Links Rápidos do Topo */
+        .links-topo {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-topo {
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-topo.insta {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .btn-topo.whats-direto {
+            background: var(--whatsapp-green);
+            color: #ffffff;
+        }
+
+        /* Selos de Informações da Loja */
+        .badges-loja {
+            background: #ffffff;
+            padding: 12px 10px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .badge-item {
+            color: #444;
+        }
+
+        /* Categorias / Filtros */
+        .categorias-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 15px 10px;
+            background: var(--bg-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Remove barra de rolagem visual do menu de categorias */
+        .categorias-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .btn-categoria {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            color: var(--text-dark);
+            padding: 8px 16px;
+            margin-right: 8px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-categoria.ativo {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border-color: var(--bg-dark);
+        }
+
+        /* Container do Catálogo */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Grid de Produtos */
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .produto-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+            transition: transform 0.2s;
+        }
+
+        .produto-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .produto-info {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .produto-titulo {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+            line-height: 1.2;
+            height: 34px; /* Garante alinhamento mesmo com nomes longos */
+            overflow: hidden;
+        }
+
+        .produto-preco {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        /* Botão Adicionar */
+        .btn-add {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            border: none;
+            padding: 9px;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-add:active {
+            background-color: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* Controle de Quantidade */
+        .controle-qtd {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            background: #eef0f2;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .btn-qtd {
+            background: #e0e0e0;
+            border: none;
+            padding: 9px 14px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .qtd-num {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        /* Rodapé de Informações */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: var(--gray-sub);
+            line-height: 1.6;
+        }
+
+        /* Barra do Carrinho Flutuante */
+        .barra-carrinho {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 15px 20px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+            border-top: 3px solid var(--accent);
+            z-index: 999;
+        }
+
+        .info-carrinho p {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .info-carrinho h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        .btn-finalizar {
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-finalizar:active {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Nome da Loja</h1>
+        <p>Moda Masculina Premium & Streetwear</p>
+        <div class="localizacao">📍 Feira dos Importados - Conjunto B - Brasília/DF</div>
+        
+        <div class="links-topo">
+            <a href="https://instagram.com/seu_perfil" target="_blank" class="btn-topo insta">📸 Ver Instagram</a>
+            <a href="https://wa.me/5561999999999" target="_blank" class="btn-topo whats-direto">💬 Dúvidas no Whats</a>
+        </div>
+    </header>
+
+    <div class="badges-loja">
+        <div class="badge-item">💳 Crédito / Pix</div>
+        <div class="badge-item">📦 Envio p/ todo DF</div>
+        <div class="badge-item">🤝 Retirada no Local</div>
+    </div>
+
+    <div class="categorias-container">
+        <button class="btn-categoria ativo" onclick="filtrarCategoria('todos', this)">Todos</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('camisetas', this)">Camisetas</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('calcas', this)">Calças</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('jaquetas', this)">Jaquetas</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('acessorios', this)">Acessórios</button>
+    </div>
+
+    <div class="container">
+        <div class="grid-produtos">
+            
+            <div class="produto-card" data-id="1" data-categoria="camisetas" data-nome="Camiseta Oversized Preta" data-preco="79.90">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" alt="Produto" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Camiseta Oversized Preta</div>
+                    <div class="produto-preco">R$ 79,90</div>
+                    <button class="btn-add" onclick="adicionarItem(1)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-1">
+                        <button class="btn-qtd" onclick="alterarQtd(1, -1)">-</button>
+                        <span class="qtd-num" id="qtd-1">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(1, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="2" data-categoria="calcas" data-nome="Calça Jogger Cargo" data-preco="149.90">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" alt="Produto" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Calça Jogger Cargo</div>
+                    <div class="produto-preco">R$ 149,90</div>
+                    <button class="btn-add" onclick="adicionarItem(2)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-2">
+                        <button class="btn-qtd" onclick="alterarQtd(2, -1)">-</button>
+                        <span class="qtd-num" id="qtd-2">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(2, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="3" data-categoria="jaquetas" data-nome="Jaqueta Corta Vento" data-preco="199.90">
+                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" alt="Produto" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Jaqueta Corta Vento Premium</div>
+                    <div class="produto-preco">R$ 199,90</div>
+                    <button class="btn-add" onclick="adicionarItem(3)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-3">
+                        <button class="btn-qtd" onclick="alterarQtd(3, -1)">-</button>
+                        <span class="qtd-num" id="qtd-3">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(3, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="4" data-categoria="acessorios" data-nome="Boné Strapback Black" data-preco="59.90">
+                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400" alt="Produto" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Boné Strapback Black</div>
+                    <div class="produto-preco">R$ 59,90</div>
+                    <button class="btn-add" onclick="adicionarItem(4)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-4">
+                        <button class="btn-qtd" onclick="alterarQtd(4, -1)">-</button>
+                        <span class="qtd-num" id="qtd-4">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(4, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>🔄 <b>Política de Trocas:</b> Até 7 dias na etiqueta diretamente na banca.</p>
+        <p style="margin-top: 10px;">Desenvolvido com ⚡ por Marcos Dev</p>
+    </footer>
+
+    <div class="barra-carrinho" id="barra-carrinho">
+        <div class="info-carrinho">
+            <p id="total-itens">0 itens selecionados</p>
+            <h3 id="total-valor">R$ 0,00</h3>
+        </div>
+        <button class="btn-finalizar" onclick="enviarWhatsApp()">Enviar Pedido</button>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO DO NÚMERO (Coloque o número dela aqui)
+        const NUMERO_WHATSAPP = "5561999999999"; 
+
+        let carrinho = {};
+
+        // Lógica de Filtro por Categoria
+        function filtrarCategoria(categoria, botao) {
+            // Atualiza classe ativa nos botões
+            document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
+            botao.classList.add('ativo');
+
+            // Filtra os cards
+            document.querySelectorAll('.produto-card').forEach(card => {
+                if (categoria === 'todos' || card.getAttribute('data-categoria') === categoria) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function adicionarItem(id) {
+            const card = document.querySelector(`[data-id="${id}"]`);
+            const nome = card.getAttribute('data-nome');
+            const preco = parseFloat(card.getAttribute('data-preco'));
+
+            carrinho[id] = { nome: nome, preco: preco, qtd: 1 };
+            
+            document.getElementById(`controle-${id}`).style.display = 'flex';
+            card.querySelector('.btn-add').style.display = 'none';
+            
+            atualizarCarrinho();
+        }
+
+        function alterarQtd(id, mudanca) {
+            if (!carrinho[id]) return;
+
+            carrinho[id].qtd += mudanca;
+
+            if (carrinho[id].qtd <= 0) {
+                delete carrinho[id];
+                document.getElementById(`controle-${id}`).style.display = 'none';
+                document.querySelector(`[data-id="${id}"] .btn-add`).style.display = 'block';
+            } else {
+                document.getElementById(`qtd-${id}`).innerText = carrinho[id].qtd;
+            }
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            let totalItens = 0;
+            let totalValor = 0;
+
+            for (let id in carrinho) {
+                totalItens += carrinho[id].qtd;
+                totalValor += carrinho[id].preco * carrinho[id].qtd;
+                document.getElementById(`qtd-${id}`).innerText = carrinho[id].qtd;
+            }
+
+            const barra = document.getElementById('barra-carrinho');
+            if (totalItens > 0) {
+                barra.style.display = 'flex';
+                document.getElementById('total-itens').innerText = `${totalItens} ${totalItens === 1 ? 'item' : 'itens'} selecionado(s)`;
+                document.getElementById('total-valor').innerText = `R$ ${totalValor.toFixed(2).replace('.', ',')}`;
+            } else {
+                barra.style.display = 'none';
+            }
+        }
+
+        function enviarWhatsApp() {
+            let texto = "*Olá! Vi o catálogo do Insta e montei meu pedido:*\n\n";
+            let total = 0;
+
+            for (let id in carrinho) {
+                let subtotal = carrinho[id].preco * carrinho[id].qtd;
+                texto += `• *${carrinho[id].qtd}x* ${carrinho[id].nome} (R$ ${carrinho[id].preco.toFixed(2).replace('.', ',')} cada)\n`;
+                total += subtotal;
+            }
+
+            texto += `\n*Total do Pedido:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+            texto += "Gostaria de combinar o pagamento e a retirada/envio!";
+
+            let urlFinal = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(texto)}`;
+            window.open(urlFinal, '_blank');
+        }
+    </script>
+</body>
+</html>
