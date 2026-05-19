@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Masculino - Feira dos Importados</title>
+    <title>BROOKLYN Wear - Catálogo Oficial</title>
     <style>
         :root {
             --bg-dark: #111111;
@@ -11,7 +11,7 @@
             --card-bg: #ffffff;
             --text-dark: #1a1a1a;
             --text-light: #ffffff;
-            --accent: #d4af37; /* Dourado */
+            --accent: #d4af37; /* Dourado Premium */
             --accent-hover: #b8972f;
             --whatsapp-green: #25d366;
             --gray-sub: #888888;
@@ -39,17 +39,52 @@
             border-bottom: 3px solid var(--accent);
         }
 
-        header h1 {
-            font-size: 1.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
+        /* Estilização da Logo e Nome Integrados */
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        header p {
-            font-size: 0.9rem;
-            color: #ccc;
-            margin-bottom: 10px;
+        .logo-img {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .brand-text {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text h1 {
+            margin: 0;
+            line-height: 1;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+
+        .brand-text span {
+            color: var(--accent);
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            color: #bbb;
+            margin-bottom: 12px;
         }
 
         .localizacao {
@@ -63,17 +98,10 @@
         }
 
         /* Links Rápidos do Topo */
-        .links-topo {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
         .btn-topo {
             text-decoration: none;
             font-size: 0.8rem;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 4px;
             font-weight: 600;
             display: flex;
@@ -89,6 +117,24 @@
         .btn-topo.whats-direto {
             background: var(--whatsapp-green);
             color: #ffffff;
+        }
+
+        .btn-reels {
+            background: linear-gradient(45deg, #111, #222);
+            border: 1px solid var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         /* Selos de Informações da Loja */
@@ -118,7 +164,6 @@
             z-index: 100;
         }
 
-        /* Remove barra de rolagem visual do menu de categorias */
         .categorias-container::-webkit-scrollbar {
             display: none;
         }
@@ -164,7 +209,6 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #eee;
-            transition: transform 0.2s;
         }
 
         .produto-img {
@@ -187,7 +231,7 @@
             margin-bottom: 4px;
             color: var(--text-dark);
             line-height: 1.2;
-            height: 34px; /* Garante alinhamento mesmo com nomes longos */
+            height: 34px;
             overflow: hidden;
         }
 
@@ -211,7 +255,6 @@
             margin-top: auto;
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .btn-add:active {
@@ -245,7 +288,7 @@
             font-size: 0.95rem;
         }
 
-        /* Rodapé de Informações */
+        /* Rodapé */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -291,24 +334,32 @@
             font-size: 0.9rem;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-finalizar:active {
-            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Nome da Loja</h1>
-        <p>Moda Masculina Premium & Streetwear</p>
+        <div class="brand-container">
+            <img src="https://gweb-research-gemini-backend-media.storage.googleapis.com/media/uploadedloja_oficial_brooklinjpeg-d4474955-6acb-4abe-b883-3de3465cc9de.jpeg" alt="Brooklyn Wear Logo" class="logo-img">
+            <div class="brand-text">
+                <h1>BROOKLYN</h1>
+                <span>Wear</span>
+            </div>
+        </div>
+
+        <p class="tagline">Estilo Streetwear & Tendência Masculina Premium</p>
         <div class="localizacao">📍 Feira dos Importados - Conjunto B - Brasília/DF</div>
         
-        <div class="links-topo">
-            <a href="https://instagram.com/seu_perfil" target="_blank" class="btn-topo insta">📸 Ver Instagram</a>
-            <a href="https://wa.me/5561999999999" target="_blank" class="btn-topo whats-direto">💬 Dúvidas no Whats</a>
+        <div class="links-topo" style="flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
+            <a href="#" target="_blank" class="btn-reels">
+                🎬 ASSISTIR REELS (Tour pela Loja)
+            </a>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; width: 100%;">
+                <a href="https://instagram.com/brooklyn_wear" target="_blank" class="btn-topo insta">📸 Instagram</a>
+                <a href="https://wa.me/5561993677819" target="_blank" class="btn-topo whats-direto">💬 Chamar no Whats</a>
+            </div>
         </div>
     </header>
 
@@ -402,18 +453,16 @@
     </div>
 
     <script>
-        // CONFIGURAÇÃO DO NÚMERO (Coloque o número dela aqui)
-        const NUMERO_WHATSAPP = "5561999999999"; 
+        // NÚMERO DO CLIENTE CONFIGURADO COM CÓDIGO DO PAÍS (55)
+        const NUMERO_WHATSAPP = "5561993677819"; 
 
         let carrinho = {};
 
         // Lógica de Filtro por Categoria
         function filtrarCategoria(categoria, botao) {
-            // Atualiza classe ativa nos botões
             document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
             botao.classList.add('ativo');
 
-            // Filtra os cards
             document.querySelectorAll('.produto-card').forEach(card => {
                 if (categoria === 'todos' || card.getAttribute('data-categoria') === categoria) {
                     card.style.display = 'flex';
@@ -471,20 +520,31 @@
             }
         }
 
+        // Função de envio com Emojis ativados de forma limpa e segura
         function enviarWhatsApp() {
-            let texto = "*Olá! Vi o catálogo do Insta e montei meu pedido:*\n\n";
+            if (Object.keys(carrinho).length === 0) {
+                alert("Seu carrinho está vazio! Adicione algum produto antes de enviar.");
+                return;
+            }
+
+            let texto = "🛍️ *NOVO PEDIDO - BROOKLYN WEAR* 🛍️\n\n";
+            texto += "👋 _Olá! Montei meu pedido pelo catálogo do Instagram:_\n\n";
+            
             let total = 0;
 
             for (let id in carrinho) {
                 let subtotal = carrinho[id].preco * carrinho[id].qtd;
-                texto += `• *${carrinho[id].qtd}x* ${carrinho[id].nome} (R$ ${carrinho[id].preco.toFixed(2).replace('.', ',')} cada)\n`;
+                texto += `📌 *${carrinho[id].qtd}x* ${carrinho[id].nome}\n`;
+                texto += `🏷️ _Valor:_ R$ ${carrinho[id].preco.toFixed(2).replace('.', ',')} cada\n`;
+                texto += `🔹 _Subtotal:_ R$ ${subtotal.toFixed(2).replace('.', ',')}\n\n`;
                 total += subtotal;
             }
 
-            texto += `\n*Total do Pedido:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
-            texto += "Gostaria de combinar o pagamento e a retirada/envio!";
+            texto += `💰 *TOTAL DO PEDIDO:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+            texto += "🏪 *Próximo passo:*\n";
+            texto += "Gostaria de confirmar a disponibilidade das peças e combinar a forma de pagamento e a entrega/retirada na Feira! 🔥";
 
-            let urlFinal = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(texto)}`;
+            let urlFinal = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(texto)}`;
             window.open(urlFinal, '_blank');
         }
     </script>
