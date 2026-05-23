@@ -41,21 +41,30 @@
 
         .brand-container {
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+        }
+
+       .logo-container {
+            width: 90px; /* Definimos o tamanho final do CÍRCULO EXTERNO */
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            background-color: #000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Garante que nada saia do círculo */
         }
 
         .logo-img {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            width: 100%; /* A imagem vai se esticar para ocupar todo o container circular */
+            height: 100%;
+            object-fit: cover; /* ESSA É A MÁGICA: faz a imagem preencher e "dar o zoom" lá dentro */
         }
-
         .brand-text {
             text-align: left;
             display: flex;
@@ -354,7 +363,9 @@
 
     <header>
         <div class="brand-container">
-            <img src="https://gweb-research-gemini-backend-media.storage.googleapis.com/media/uploadedloja_oficial_brooklinjpeg-d4474955-6acb-4abe-b883-3de3465cc9de.jpeg" alt="Brooklyn Wear Logo" class="logo-img">
+            <div class="logo-container">
+              <img src="logo.png" alt="Brooklyn Wear Logo" class="logo-img">
+            </div>
             <div class="brand-text">
                 <h1>BROOKLYN</h1>
                 <span>Wear</span>
