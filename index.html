@@ -11,7 +11,7 @@
             --card-bg: #ffffff;
             --text-dark: #1a1a1a;
             --text-light: #ffffff;
-            --accent: #d4af37; /* Dourado Premium */
+            --accent: #d4af37;
             --accent-hover: #b8972f;
             --whatsapp-green: #25d366;
             --gray-sub: #888888;
@@ -39,7 +39,6 @@
             border-bottom: 3px solid var(--accent);
         }
 
-        /* Estilização da Logo e Nome Integrados */
         .brand-container {
             display: flex;
             align-items: center;
@@ -97,7 +96,14 @@
             font-weight: 500;
         }
 
-        /* Links Rápidos do Topo */
+        .links-topo {
+            flex-direction: column; 
+            align-items: center; 
+            gap: 12px; 
+            margin-top: 20px;
+            display: flex;
+        }
+
         .btn-topo {
             text-decoration: none;
             font-size: 0.8rem;
@@ -109,15 +115,8 @@
             gap: 5px;
         }
 
-        .btn-topo.insta {
-            background: #ffffff;
-            color: #000000;
-        }
-
-        .btn-topo.whats-direto {
-            background: var(--whatsapp-green);
-            color: #ffffff;
-        }
+        .btn-topo.insta { background: #ffffff; color: #000000; }
+        .btn-topo.whats-direto { background: var(--whatsapp-green); color: #ffffff; }
 
         .btn-reels {
             background: linear-gradient(45deg, #111, #222);
@@ -137,7 +136,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Selos de Informações da Loja */
+        /* Selos de Informações */
         .badges-loja {
             background: #ffffff;
             padding: 12px 10px;
@@ -148,13 +147,10 @@
             border-bottom: 1px solid #ddd;
             text-align: center;
         }
-
-        .badge-item {
-            color: #444;
-        }
+        .badge-item { color: #444; }
 
         /* Categorias / Filtros */
-        .categorias-container {
+     .categorias-container {
             overflow-x: auto;
             white-space: nowrap;
             padding: 15px 10px;
@@ -162,11 +158,11 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center; /* <-- O toque de mágica para centralizar */
         }
 
-        .categorias-container::-webkit-scrollbar {
-            display: none;
-        }
+        .categorias-container::-webkit-scrollbar { display: none; }
 
         .btn-categoria {
             background: #ffffff;
@@ -187,17 +183,18 @@
             border-color: var(--bg-dark);
         }
 
-        /* Container do Catálogo */
+       /* Container do Catálogo Atualizado */
         .container {
-            max-width: 600px;
+            max-width: 1200px; /* Aumentamos para aproveitar a tela toda do PC */
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 20px 15px;
         }
 
-        /* Grid de Produtos */
+        /* Grid de Produtos Responsiva de Verdade */
         .grid-produtos {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            /* A mágica acontece aqui: auto-fill e minmax adaptam as colunas automaticamente */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 15px;
         }
 
@@ -213,13 +210,13 @@
 
         .produto-img {
             width: 100%;
-            height: 170px;
+            height: 180px;
             object-fit: cover;
             background-color: #eee;
         }
 
         .produto-info {
-            padding: 10px;
+            padding: 12px 10px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -227,27 +224,38 @@
 
         .produto-titulo {
             font-size: 0.9rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 4px;
             color: var(--text-dark);
             line-height: 1.2;
-            height: 34px;
+        }
+
+        /* NOVA CLASSE: Descrição do produto */
+        .produto-desc {
+            font-size: 0.75rem;
+            color: var(--gray-sub);
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limita a 2 linhas para não quebrar o layout */
+            -webkit-box-orient: vertical;
             overflow: hidden;
+            flex-grow: 1;
         }
 
         .produto-preco {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.15rem;
+            font-weight: 800;
             color: var(--text-dark);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        /* Botão Adicionar */
+        /* Botões */
         .btn-add {
             background-color: var(--bg-dark);
             color: var(--text-light);
             border: none;
-            padding: 9px;
+            padding: 10px;
             border-radius: 4px;
             font-weight: 700;
             cursor: pointer;
@@ -255,14 +263,11 @@
             margin-top: auto;
             font-size: 0.8rem;
             text-transform: uppercase;
+            transition: 0.2s;
         }
 
-        .btn-add:active {
-            background-color: var(--accent);
-            color: var(--bg-dark);
-        }
+        .btn-add:active { background-color: var(--accent); color: var(--bg-dark); }
 
-        /* Controle de Quantidade */
         .controle-qtd {
             display: none;
             align-items: center;
@@ -277,18 +282,15 @@
         .btn-qtd {
             background: #e0e0e0;
             border: none;
-            padding: 9px 14px;
+            padding: 10px 15px;
             font-weight: bold;
             font-size: 1.1rem;
             cursor: pointer;
         }
 
-        .qtd-num {
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
+        .qtd-num { font-weight: 700; font-size: 0.95rem; }
 
-        /* Rodapé */
+        /* Rodapé e Carrinho */
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -297,7 +299,6 @@
             line-height: 1.6;
         }
 
-        /* Barra do Carrinho Flutuante */
         .barra-carrinho {
             position: fixed;
             bottom: 0;
@@ -314,15 +315,8 @@
             z-index: 999;
         }
 
-        .info-carrinho p {
-            font-size: 0.8rem;
-            color: #aaa;
-        }
-
-        .info-carrinho h3 {
-            font-size: 1.25rem;
-            color: var(--accent);
-        }
+        .info-carrinho p { font-size: 0.8rem; color: #aaa; }
+        .info-carrinho h3 { font-size: 1.25rem; color: var(--accent); }
 
         .btn-finalizar {
             background-color: var(--whatsapp-green);
@@ -334,6 +328,25 @@
             font-size: 0.9rem;
             cursor: pointer;
             text-transform: uppercase;
+        }
+
+        /* Regras exclusivas para Telas Maiores (Tablets e PCs) */
+        @media (min-width: 768px) {
+            .produto-img {
+                height: 240px; /* Deixa as fotos mais vistosas e imponentes no PC */
+            }
+            
+            .barra-carrinho {
+                max-width: 1200px; /* Limita a largura da barra verde */
+                margin: 0 auto;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 12px 12px 0 0; /* Arredonda as pontas em cima */
+            }
+            
+            .brand-container {
+                gap: 25px; /* Afasta um pouco mais a logo do nome para respirar melhor */
+            }
         }
     </style>
 </head>
@@ -347,24 +360,20 @@
                 <span>Wear</span>
             </div>
         </div>
-
         <p class="tagline">Estilo Streetwear & Tendência Masculina Premium</p>
         <div class="localizacao">📍 Feira dos Importados - Conjunto B - Brasília/DF</div>
         
-        <div class="links-topo" style="flex-direction: column; align-items: center; gap: 12px; margin-top: 20px;">
-            <a href="#" target="_blank" class="btn-reels">
-                🎬 ASSISTIR REELS (Tour pela Loja)
-            </a>
-            
+        <div class="links-topo">
+            <a href="#" target="_blank" class="btn-reels">🎬 ASSISTIR REELS (Destaque da Loja)</a>
             <div style="display: flex; gap: 10px; justify-content: center; width: 100%;">
-                <a href="https://instagram.com/brooklyn_wear" target="_blank" class="btn-topo insta">📸 Instagram</a>
+                <a href="https://instagram.com/gdiegocosta" target="_blank" class="btn-topo insta">📸 Instagram</a>
                 <a href="https://wa.me/5561993677819" target="_blank" class="btn-topo whats-direto">💬 Chamar no Whats</a>
             </div>
         </div>
     </header>
 
-    <div class="badges-loja">
-        <div class="badge-item">💳 Crédito / Pix</div>
+<div class="badges-loja">
+        <div class="badge-item">💳 Pix | Cartões | Dinheiro</div>
         <div class="badge-item">📦 Envio p/ todo DF</div>
         <div class="badge-item">🤝 Retirada no Local</div>
     </div>
@@ -373,18 +382,20 @@
         <button class="btn-categoria ativo" onclick="filtrarCategoria('todos', this)">Todos</button>
         <button class="btn-categoria" onclick="filtrarCategoria('camisetas', this)">Camisetas</button>
         <button class="btn-categoria" onclick="filtrarCategoria('calcas', this)">Calças</button>
-        <button class="btn-categoria" onclick="filtrarCategoria('jaquetas', this)">Jaquetas</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('bermudas', this)">Bermudas</button>
+        <button class="btn-categoria" onclick="filtrarCategoria('bones', this)">Bonés</button>
         <button class="btn-categoria" onclick="filtrarCategoria('acessorios', this)">Acessórios</button>
     </div>
 
     <div class="container">
         <div class="grid-produtos">
             
-            <div class="produto-card" data-id="1" data-categoria="camisetas" data-nome="Camiseta Oversized Preta" data-preco="79.90">
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" alt="Produto" class="produto-img">
+            <div class="produto-card" data-id="1" data-categoria="camisetas" data-nome="Blusa Texturizada Premium" data-preco="89.90">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" alt="Blusa Texturizada" class="produto-img">
                 <div class="produto-info">
-                    <div class="produto-titulo">Camiseta Oversized Preta</div>
-                    <div class="produto-preco">R$ 79,90</div>
+                    <div class="produto-titulo">Blusa Texturizada Premium</div>
+                    <div class="produto-desc">Sucesso do vídeo! Textura em relevo, caimento impecável e tecido que não amassa.</div>
+                    <div class="produto-preco">R$ 89,90</div>
                     <button class="btn-add" onclick="adicionarItem(1)">Adicionar</button>
                     <div class="controle-qtd" id="controle-1">
                         <button class="btn-qtd" onclick="alterarQtd(1, -1)">-</button>
@@ -394,11 +405,12 @@
                 </div>
             </div>
 
-            <div class="produto-card" data-id="2" data-categoria="calcas" data-nome="Calça Jogger Cargo" data-preco="149.90">
-                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" alt="Produto" class="produto-img">
+            <div class="produto-card" data-id="2" data-categoria="camisetas" data-nome="Camiseta Malha Peruana" data-preco="79.90">
+                <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400" alt="Malha Peruana" class="produto-img">
                 <div class="produto-info">
-                    <div class="produto-titulo">Calça Jogger Cargo</div>
-                    <div class="produto-preco">R$ 149,90</div>
+                    <div class="produto-titulo">Camiseta Malha Peruana</div>
+                    <div class="produto-desc">A clássica indispensável. Algodão com elastano que se ajusta perfeitamente ao corpo.</div>
+                    <div class="produto-preco">R$ 79,90</div>
                     <button class="btn-add" onclick="adicionarItem(2)">Adicionar</button>
                     <div class="controle-qtd" id="controle-2">
                         <button class="btn-qtd" onclick="alterarQtd(2, -1)">-</button>
@@ -408,11 +420,12 @@
                 </div>
             </div>
 
-            <div class="produto-card" data-id="3" data-categoria="jaquetas" data-nome="Jaqueta Corta Vento" data-preco="199.90">
-                <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" alt="Produto" class="produto-img">
+            <div class="produto-card" data-id="3" data-categoria="camisetas" data-nome="Camiseta Social Esporte Fino" data-preco="99.90">
+                <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400" alt="Camiseta Social" class="produto-img">
                 <div class="produto-info">
-                    <div class="produto-titulo">Jaqueta Corta Vento Premium</div>
-                    <div class="produto-preco">R$ 199,90</div>
+                    <div class="produto-titulo">Social Esporte Fino</div>
+                    <div class="produto-desc">Para eventos casuais. Tecido leve, botões discretos e modelagem slim fit.</div>
+                    <div class="produto-preco">R$ 99,90</div>
                     <button class="btn-add" onclick="adicionarItem(3)">Adicionar</button>
                     <div class="controle-qtd" id="controle-3">
                         <button class="btn-qtd" onclick="alterarQtd(3, -1)">-</button>
@@ -422,16 +435,182 @@
                 </div>
             </div>
 
-            <div class="produto-card" data-id="4" data-categoria="acessorios" data-nome="Boné Strapback Black" data-preco="59.90">
-                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400" alt="Produto" class="produto-img">
+            <div class="produto-card" data-id="4" data-categoria="camisetas" data-nome="Camiseta Oversized Street" data-preco="85.90">
+                <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400" alt="Oversized" class="produto-img">
                 <div class="produto-info">
-                    <div class="produto-titulo">Boné Strapback Black</div>
-                    <div class="produto-preco">R$ 59,90</div>
+                    <div class="produto-titulo">Oversized Streetwear</div>
+                    <div class="produto-desc">Puro estilo urbano. Modelagem ampla com ombros caídos.</div>
+                    <div class="produto-preco">R$ 85,90</div>
                     <button class="btn-add" onclick="adicionarItem(4)">Adicionar</button>
                     <div class="controle-qtd" id="controle-4">
                         <button class="btn-qtd" onclick="alterarQtd(4, -1)">-</button>
                         <span class="qtd-num" id="qtd-4">0</span>
                         <button class="btn-qtd" onclick="alterarQtd(4, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="5" data-categoria="bermudas" data-nome="Bermuda de Linho Casual" data-preco="129.90">
+                <img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400" alt="Bermuda Linho" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Bermuda de Linho Casual</div>
+                    <div class="produto-desc">A mais vendida do momento! Super leve, sofisticada e com cordão ajustável.</div>
+                    <div class="produto-preco">R$ 129,90</div>
+                    <button class="btn-add" onclick="adicionarItem(5)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-5">
+                        <button class="btn-qtd" onclick="alterarQtd(5, -1)">-</button>
+                        <span class="qtd-num" id="qtd-5">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(5, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="6" data-categoria="bermudas" data-nome="Bermuda Jeans Destroyed" data-preco="119.90">
+                <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=400" alt="Bermuda Jeans" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Bermuda Jeans Destroyed</div>
+                    <div class="produto-desc">Lavagem moderna com rasgos estratégicos. Estilo despojado para o dia a dia.</div>
+                    <div class="produto-preco">R$ 119,90</div>
+                    <button class="btn-add" onclick="adicionarItem(6)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-6">
+                        <button class="btn-qtd" onclick="alterarQtd(6, -1)">-</button>
+                        <span class="qtd-num" id="qtd-6">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(6, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="7" data-categoria="bermudas" data-nome="Bermuda de Brim Confort" data-preco="109.90">
+                <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=400" alt="Bermuda Brim" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Bermuda de Brim Confort</div>
+                    <div class="produto-desc">Peça coringa para qualquer rolê. Costura reforçada e cores sólidas.</div>
+                    <div class="produto-preco">R$ 109,90</div>
+                    <button class="btn-add" onclick="adicionarItem(7)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-7">
+                        <button class="btn-qtd" onclick="alterarQtd(7, -1)">-</button>
+                        <span class="qtd-num" id="qtd-7">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(7, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="8" data-categoria="calcas" data-nome="Calça Jogger Cargo" data-preco="149.90">
+                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" alt="Calça Cargo" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Calça Jogger Cargo</div>
+                    <div class="produto-desc">Bolsos laterais amplos, ajuste no tornozelo e muito conforto.</div>
+                    <div class="produto-preco">R$ 149,90</div>
+                    <button class="btn-add" onclick="adicionarItem(8)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-8">
+                        <button class="btn-qtd" onclick="alterarQtd(8, -1)">-</button>
+                        <span class="qtd-num" id="qtd-8">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(8, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="9" data-categoria="calcas" data-nome="Calça Jeans Skinny Elastano" data-preco="139.90">
+                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400" alt="Jeans Skinny" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Jeans Skinny Elastano</div>
+                    <div class="produto-desc">Não trava o movimento! Alto grau de elastano com lavagem escura premium.</div>
+                    <div class="produto-preco">R$ 139,90</div>
+                    <button class="btn-add" onclick="adicionarItem(9)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-9">
+                        <button class="btn-qtd" onclick="alterarQtd(9, -1)">-</button>
+                        <span class="qtd-num" id="qtd-9">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(9, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="10" data-categoria="calcas" data-nome="Calça Alfaiataria Masculina" data-preco="159.90">
+                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=400" alt="Alfaiataria" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Calça Alfaiataria Street</div>
+                    <div class="produto-desc">Elegância com pegada urbana. Fica perfeita combinada com tênis casual.</div>
+                    <div class="produto-preco">R$ 159,90</div>
+                    <button class="btn-add" onclick="adicionarItem(10)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-10">
+                        <button class="btn-qtd" onclick="alterarQtd(10, -1)">-</button>
+                        <span class="qtd-num" id="qtd-10">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(10, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="11" data-categoria="bones" data-nome="Boné Strapback Logo" data-preco="59.90">
+                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400" alt="Boné Strapback" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Boné Strapback Black</div>
+                    <div class="produto-desc">Aba curva, fecho ajustável de metal e logo minimalista bordada.</div>
+                    <div class="produto-preco">R$ 59,90</div>
+                    <button class="btn-add" onclick="adicionarItem(11)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-11">
+                        <button class="btn-qtd" onclick="alterarQtd(11, -1)">-</button>
+                        <span class="qtd-num" id="qtd-11">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(11, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="12" data-categoria="bones" data-nome="Boné Trucker Tela" data-preco="49.90">
+           <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?w=400" alt="Boné Trucker" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Boné Trucker Classic</div>
+                    <div class="produto-desc">Estilo clássico com rede traseira, garantindo muita respiração pro couro cabeludo.</div>
+                    <div class="produto-preco">R$ 49,90</div>
+                    <button class="btn-add" onclick="adicionarItem(12)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-12">
+                        <button class="btn-qtd" onclick="alterarQtd(12, -1)">-</button>
+                        <span class="qtd-num" id="qtd-12">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(12, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="13" data-categoria="acessorios" data-nome="Corrente Prata Grumet" data-preco="199.90">
+                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400" alt="Corrente" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Corrente Prata 925 Grumet</div>
+                    <div class="produto-desc">Malha grumet 3mm maciça. Brilho espelhado que não preteja.</div>
+                    <div class="produto-preco">R$ 199,90</div>
+                    <button class="btn-add" onclick="adicionarItem(13)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-13">
+                        <button class="btn-qtd" onclick="alterarQtd(13, -1)">-</button>
+                        <span class="qtd-num" id="qtd-13">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(13, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="14" data-categoria="acessorios" data-nome="Pulseira Couro Trançado" data-preco="39.90">
+                <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400" alt="Pulseira" class="produto-img" style="filter: grayscale(100%);">
+                <div class="produto-info">
+                    <div class="produto-titulo">Pulseira Couro Trançado</div>
+                    <div class="produto-desc">Fecho magnético de encaixe rápido e detalhe robusto em aço inoxidável.</div>
+                    <div class="produto-preco">R$ 39,90</div>
+                    <button class="btn-add" onclick="adicionarItem(14)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-14">
+                        <button class="btn-qtd" onclick="alterarQtd(14, -1)">-</button>
+                        <span class="qtd-num" id="qtd-14">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(14, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="produto-card" data-id="15" data-categoria="acessorios" data-nome="Óculos de Sol Retrô" data-preco="79.90">
+                <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400" alt="Óculos de Sol" class="produto-img">
+                <div class="produto-info">
+                    <div class="produto-titulo">Óculos de Sol Retrô Black</div>
+                    <div class="produto-desc">Proteção UV400 contra os raios solares. Armação leve em acetato resistente.</div>
+                    <div class="produto-preco">R$ 79,90</div>
+                    <button class="btn-add" onclick="adicionarItem(15)">Adicionar</button>
+                    <div class="controle-qtd" id="controle-15">
+                        <button class="btn-qtd" onclick="alterarQtd(15, -1)">-</button>
+                        <span class="qtd-num" id="qtd-15">0</span>
+                        <button class="btn-qtd" onclick="alterarQtd(15, 1)">+</button>
                     </div>
                 </div>
             </div>
@@ -453,12 +632,10 @@
     </div>
 
     <script>
-        // NÚMERO DO CLIENTE CONFIGURADO COM CÓDIGO DO PAÍS (55)
         const NUMERO_WHATSAPP = "5561993677819"; 
 
         let carrinho = {};
 
-        // Lógica de Filtro por Categoria
         function filtrarCategoria(categoria, botao) {
             document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
             botao.classList.add('ativo');
@@ -520,8 +697,7 @@
             }
         }
 
-        // Função de envio com Emojis ativados de forma limpa e segura
-        function enviarWhatsApp() {
+      function enviarWhatsApp() {
             if (Object.keys(carrinho).length === 0) {
                 alert("Seu carrinho está vazio! Adicione algum produto antes de enviar.");
                 return;
@@ -544,9 +720,9 @@
             texto += "🏪 *Próximo passo:*\n";
             texto += "Gostaria de confirmar a disponibilidade das peças e combinar a forma de pagamento e a entrega/retirada na Feira! 🔥";
 
-            let urlFinal = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(texto)}`;
+            let urlFinal = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(texto)}`;
             window.open(urlFinal, '_blank');
-        }
+        } 
     </script>
 </body>
 </html>
